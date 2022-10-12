@@ -1,17 +1,17 @@
 import os
 import random
 
-from game.casting.actor import Actor
-from game.casting.objects import Objects
-from game.casting.cast import Cast
+from casting.actor import Actor
+from casting.objects import Objects
+from casting.cast import Cast
 
-from game.directing.director import Director
+from directing.director import Director
 
-from game.services.keyboard_service import KeyboardService
-from game.services.video_service import VideoService
+from services.keyboard_service import KeyboardService
+from services.video_service import VideoService
 
-from game.shared.color import Color
-from game.shared.point import Point
+from shared.color import Color
+from shared.point import Point
 
 
 FRAME_RATE = 12
@@ -23,7 +23,7 @@ COLS = 60
 ROWS = 40
 CAPTION = "Greed"
 WHITE = Color(255, 255, 255)
-DEFAULT_ARTIFACTS = 40
+DEFAULT_OBJECTS = 60
 
 
 def main():
@@ -33,16 +33,16 @@ def main():
     
     # create the banner
     banner = Actor()
-    banner.set_text("Score: ")
+    banner.set_text("")
     banner.set_font_size(FONT_SIZE)
     banner.set_color(WHITE)
     banner.set_position(Point(CELL_SIZE, 0))
-    cast.add_actor("points", banner)
+    cast.add_actor("banners", banner)
     
     # create the robot
     x = int(MAX_X / 2)
     y = int(MAX_Y / 2)
-    position = Point(x, MAX_Y - CELL_SIZE)
+    position = Point(x, (MAX_Y - 10) - CELL_SIZE)
 
     robot = Actor()
     robot.set_text("#")
@@ -53,7 +53,7 @@ def main():
     
     # create the artifacts
 
-    for n in range(DEFAULT_ARTIFACTS):
+    for n in range(DEFAULT_OBJECTS):
         # A Gem will be "*" and a rock will be "O"
         text = random.choice(["*", "O"])
 
